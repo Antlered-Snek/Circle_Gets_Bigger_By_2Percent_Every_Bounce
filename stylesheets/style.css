@@ -1,0 +1,10 @@
+body {
+	background-color: black;
+}
+
+#brainrot {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: black;
+}
