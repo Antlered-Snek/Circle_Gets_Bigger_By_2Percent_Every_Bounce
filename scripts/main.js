@@ -19,7 +19,8 @@ canvas.height = canvas_height;
         
         
     // Universal Functions and Variables
-const gravity = 200;
+let rand;
+const gravity = 300;
 const distance = 150;
 let effects = [];
 
@@ -127,8 +128,15 @@ class Circle {
         let forceX = force * Math.cos(rot) *sideX;
         let forceY = force * Math.sin(rot) *sideY;
         
-        this.velocity.x = -forceX*1.012;
-        this.velocity.y = -forceY*1.012;
+        this.velocity.x = -forceX*1.015;
+        this.velocity.y = -forceY*1.015;
+
+
+            // Playing Audio
+        notes[sheet[order] - 1].currentTime = 0;
+        notes[sheet[order] - 1].play();
+        if (order < maxOrder-1) order++;
+        else order = 0;
     }
     
     
@@ -211,19 +219,157 @@ class Effect {
         this.draw()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+    // Audio
+const key01 = new Audio('audio/key01.mp3');
+const key02 = new Audio('audio/key02.mp3');
+const key03 = new Audio('audio/key03.mp3');
+const key04 = new Audio('audio/key04.mp3');
+const key05 = new Audio('audio/key05.mp3');
+const key06 = new Audio('audio/key06.mp3');
+const key07 = new Audio('audio/key07.mp3');
+const key08 = new Audio('audio/key08.mp3');
+const key09 = new Audio('audio/key09.mp3');
+const key10 = new Audio('audio/key10.mp3');
+const key11 = new Audio('audio/key11.mp3');
+const key12 = new Audio('audio/key12.mp3');
+const key13 = new Audio('audio/key13.mp3');
+const key14 = new Audio('audio/key14.mp3');
+const key15 = new Audio('audio/key15.mp3');
+const key16 = new Audio('audio/key16.mp3');
+const key17 = new Audio('audio/key17.mp3');
+const key18 = new Audio('audio/key18.mp3');
+const key19 = new Audio('audio/key19.mp3');
+const key20 = new Audio('audio/key20.mp3');
+const key21 = new Audio('audio/key21.mp3');
+const key22 = new Audio('audio/key22.mp3');
+const key23 = new Audio('audio/key23.mp3');
+const key24 = new Audio('audio/key24.mp3');
+
+
+
+
+
+
+
+    // Songs
+const notes = [ key01, key02, key03, key04, key05, key06, key07, key08, key09, key10, key11, key12, key13, key14, key15, key16, key17, key18, key19, key20, key21, key22, key23, key24 ];
+let sheet = [];
+let order = 0;
+let maxOrder;
+
+rand = Math.floor(Math.random()*5);
+// rand = 4;
+
+switch ( rand ) {
+    case 0:
+        sheet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+        break;
+    case 1:
+        sheet = [21, 20, 23, 21, 20, 23, 21, 19, 21, 17, 13, 14,   16, 17, 16, 17, 16, 17, 16, 17,   19, 20, 19, 20, 19, 20, 19, 20,    21, 22, 21, 22, 21, 22, 21, 22,   21, 24, 23, 21, 19, 17];
+        break;
+    case 2:
+        sheet = [10, 12, 8, 12, 14,  16, 14, 12, 10, 8, 10, 6];
+        break;
+    case 3:
+        sheet = [6, 6, 16, 11, 9, 7, 6, 1, 2, 6,    4, 4, 16, 11, 9, 7, 6, 1, 2, 6,   2, 2, 16, 11, 9, 7, 6, 1, 2, 6,   1, 1, 16, 11, 9, 7, 6, 1, 2, 6];
+        break;
+    case 4:
+        sheet = [18, 18, 20, 20, 21, 21, 22,     18, 18, 20, 20, 21, 21, 22,    22, 22, 20, 20, 19, 19, 18,    22, 22, 20, 20, 19, 19, 18];
+}
+maxOrder = sheet.length;
+
+
+
+
+
+
+
+    // Caption
+let caption;
+rand = Math.floor(Math.random()*8);
+// rand = 7;
+
+switch ( rand ) {
+    case 0:
+        caption = 'Watch Till the End!<br>💀💀💀';
+        break;
+    case 1:
+        caption = "Don't Click Off!<br>🤪🤪🤪";
+        break;
+    case 2:
+        caption = "The Results Are Shocking!<br>😱😱😱";
+        break;
+    case 3:
+        caption = "Better Than Eating Glue!<br>👅👅👅";
+        break;
+    case 4:
+        caption = "Watch Bang Bravern!<br>🧑🧑🧑";
+        break;
+    case 5:
+        caption = "Like The Speed of Sound<br>🛏️🛏️🛏️";
+        break;
+    case 6:
+        caption = "From The River to The Sea<br>🍉🍉🍉";
+        break;
+    case 7:
+        caption = "Top Satisfyingest Moments<br>🌠🌠🌠";
+}
+
+
+
+
+
+
+
+
+
+
         
         
         
         
         
         
+
+
+
+
+
+
+
+    // Start
+document.addEventListener('click', () => {
+    if ( document.getElementById('start').style.display != 'none' ) {
+        document.getElementById('start').style.display = 'none';
+        document.getElementById('caption').style.display = 'block';
+        document.getElementById('caption').innerHTML = caption;
+        animate();
+    }
+})
         
         
-        
-        
+c.beginPath();
+c.lineWidth = 10;
+c.strokeStyle = `rgba(${center.rgba.r}, ${center.rgba.g}, ${center.rgba.b}, ${center.rgba.a})`;
+c.arc(center.position.x, center.position.y, distance, 0, Math.PI*2);
+c.stroke();
+c.closePath();
+julian.draw();
+
          
         
-animate();
+
     // Animation
 function animate() {
     window.requestAnimationFrame(animate);
